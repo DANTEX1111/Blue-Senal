@@ -54,22 +54,6 @@ background:rgba(0,0,0,0.2);
 
 <div class="overlay"></div>
 
-<script>
-
-/ Forzar autoplay en celulares */
-
-const video = document.getElementById("videoFondo");
-
-function iniciarVideo(){
-video.play().catch(()=>{});
-}
-
-document.addEventListener("DOMContentLoaded", iniciarVideo);
-document.addEventListener("touchstart", iniciarVideo);
-document.addEventListener("scroll", iniciarVideo);
-
-</script>
-
 </body>
 
 </html>
