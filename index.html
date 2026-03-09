@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Blue Señal</title>
 
 <style>
 
-body{
+*{
 margin:0;
 padding:0;
-overflow:hidden;
-background:black;
+box-sizing:border-box;
 }
 
-video{
+body{
+background:black;
+overflow:hidden;
+height:100vh;
+}
+
+
+
+#videoFondo{
 position:fixed;
 top:0;
 left:0;
-width:100vw;
-height:100vh;
+width:100%;
+height:100%;
 object-fit:cover;
+z-index:-1;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.2);
 }
 
 </style>
@@ -29,9 +48,28 @@ object-fit:cover;
 
 <body>
 
-<video autoplay muted loop playsinline webkit-playsinline>
-    <source src="blue señal.MP4" type="video/mp4">
+<video id="videoFondo" autoplay muted loop playsinline webkit-playsinline preload="auto">
+<source src="blue-senal.MP4" type="video/mp4">
 </video>
 
+<div class="overlay"></div>
+
+<script>
+
+/ Forzar autoplay en celulares */
+
+const video = document.getElementById("videoFondo");
+
+function iniciarVideo(){
+video.play().catch(()=>{});
+}
+
+document.addEventListener("DOMContentLoaded", iniciarVideo);
+document.addEventListener("touchstart", iniciarVideo);
+document.addEventListener("scroll", iniciarVideo);
+
+</script>
+
 </body>
+
 </html>
