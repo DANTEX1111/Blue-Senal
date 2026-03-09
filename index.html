@@ -1,59 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Señal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: black;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Blue Señal</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-background:black;
-overflow:hidden;
-height:100vh;
-}
-
-
-
-#videoFondo{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-1;
-}
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.2);
-}
-
-</style>
-
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
 </head>
-
 <body>
 
-<video id="videoFondo" autoplay muted loop playsinline webkit-playsinline preload="auto">
-<source src="blue-senal.MP4" type="video/mp4">
-</video>
+    <video autoplay muted loop playsinline preload="auto">
+        <source src="blue-senal.MP4" type="video/mp4">
+        Tu navegador no soporta videos.
+    </video>
+    
+    <script>
+    window.addEventListener('load', function() {
+        var video = document.querySelector('video');
+        var playPromise = video.play();
 
-<div class="overlay"></div>
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Autoplay inició correctamente
+            }).catch(error => {
+                // El autoplay fue bloqueado, podemos intentar reproducirlo al primer toque
+                document.body.addEventListener('click', () => {
+                    video.play();
+                }, { once: true });
+            });
+        }
+    });
+</script>
 
 </body>
-
 </html>
